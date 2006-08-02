@@ -1,5 +1,5 @@
 CC=g++
-LDFLAGS=-lm
+LDFLAGS=
 #CFLAGS=-pipe -Wall -ansi -pedantic -Werror -O2  
 CFLAGS=-pipe -Wall -ansi -pedantic -g -O1
 OBJECTS=
@@ -11,9 +11,14 @@ BIN=canons
 	$(CC) $(CFLAGS) -c $< 
 
 
-$(BIN): $(OBJECTS) canons.cpp
+$(BIN): $(OBJECTS) canons.cpp perm.h
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $(BIN) canons.cpp $(OBJECTS)
 
+perm.h: permutation.pl
+	perl permutation.pl
+
+strip: $(BIN)
+	strip $(BIN)
 
 clean:
 	rm -f *.o $(BIN) core
