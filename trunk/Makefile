@@ -1,18 +1,18 @@
-CC=g++
+CC=gcc
 LDFLAGS=
 #CFLAGS=-pipe -Wall -ansi -pedantic -Werror -O2  
-CFLAGS=-pipe -Wall -ansi -pedantic -g -O1
+CFLAGS=-pipe -Wall  -ansi -pedantic -g -O1
 OBJECTS=
 BIN=canons
 
-.SUFFIXES: .cpp 
+.SUFFIXES: .c 
 
-.cpp.o: 
-	$(CC) $(CFLAGS) -c $< 
+.c.o: 
+	$(CC) -std=c99 $(CFLAGS) -c $< 
 
 
-$(BIN): $(OBJECTS) canons.cpp perm.h
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $(BIN) canons.cpp $(OBJECTS)
+$(BIN): $(OBJECTS) canons.c perm.h
+	$(CC) -std=c99 $(CFLAGS) $(LDFLAGS) -o $(BIN) canons.c $(OBJECTS)
 
 perm.h: permutation.pl
 	perl permutation.pl
@@ -26,3 +26,6 @@ clean:
 test: $(BIN)
 	./tests.sh
 	echo "Tests finished sucessfully"
+
+html-doc: canons.1.txt
+	asciidoc -d manpage canons.1.txt
