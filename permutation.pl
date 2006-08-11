@@ -22,7 +22,7 @@ print OUT <<HEADER;
  * directly, all changes will be lost on running `make`. */
 HEADER
 
-print OUT "const int perm[1296][9] = {\n";
+print OUT "static const int perm[1296][9] = {\n";
 
 my @res = (0 .. 8);
 foreach my $e (0 .. 5){
